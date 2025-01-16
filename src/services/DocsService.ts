@@ -69,4 +69,17 @@ export class DocsService {
       );
     }
   }
+
+  public static async getCategories(): Promise<string[]> {
+    const docs = await DocsService.getDocs();
+    if (!docs) {
+      return [];
+    }
+
+    const categories = docs
+      .map((doc) => doc.category)
+      .filter((category) => category !== undefined) as string[];
+
+    return Array.from(new Set(categories));
+  }
 }
