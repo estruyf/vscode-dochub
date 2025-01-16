@@ -1,6 +1,6 @@
 import { Uri, workspace } from "vscode";
 import { General } from "../constants";
-import { fileExists } from "../utils";
+import { fileExists, readFileContent } from "../utils";
 import { Extension } from "./Extension";
 import { parse } from "jsonc-parser/lib/esm/main.js";
 import { DocLink } from "../models";
@@ -35,8 +35,7 @@ export class DocsService {
 
     const docsUri = Uri.joinPath(workspaceFolder.uri, General.docsFile);
     if (await fileExists(docsUri)) {
-      const fileContent = await workspace.fs.readFile(docsUri);
-      const fileTxt = Buffer.from(fileContent).toString("utf-8");
+      const fileTxt = await readFileContent(docsUri);
       const json = parse(fileTxt);
       return json;
     }

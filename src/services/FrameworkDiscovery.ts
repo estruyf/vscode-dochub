@@ -1,4 +1,6 @@
+import { parse } from "jsonc-parser";
 import { Uri, workspace } from "vscode";
+import { readFileContent } from "../utils";
 
 export class FrameworkDiscovery {
   private static frameworks: Array<
@@ -56,10 +58,9 @@ export class FrameworkDiscovery {
 
     for (const folder of workspaceFolders) {
       const packageJsonUri = Uri.joinPath(folder.uri, "package.json");
-      const packageJson = await workspace.fs.readFile(packageJsonUri);
+      const packageJson = await readFileContent(packageJsonUri);
       if (packageJson) {
-        const packageTxt = Buffer.from(packageJson).toString("utf-8");
-        return JSON.parse(packageTxt);
+        return JSON.parse(packageJson);
       }
     }
 
