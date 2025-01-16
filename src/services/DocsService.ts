@@ -44,6 +44,17 @@ export class DocsService {
     return [];
   }
 
+  public static async removeFromDocs(url: string) {
+    const docsFile = await DocsService.getDocs();
+    if (!docsFile) {
+      return;
+    }
+
+    const updatedDocs = docsFile.filter((doc) => doc.url !== url);
+
+    await DocsService.updateDocsFile(updatedDocs);
+  }
+
   private static async updateDocsFile(docs: DocLink[]) {
     const workspaceFolder = Extension.getInstance().workspaceFolder;
     if (!workspaceFolder) {

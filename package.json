@@ -81,6 +81,12 @@
         "command": "dochub.collapseAll",
         "title": "Collapse all",
         "icon": "$(collapse-all)"
+      },
+      {
+        "command": "dochub.removeDocs",
+        "title": "Remove Documentation",
+        "category": "DocHub",
+        "icon": "$(trash)"
       }
     ],
     "views": {
@@ -112,6 +118,10 @@
         {
           "command": "dochub.collapseAll",
           "when": "false"
+        },
+        {
+          "command": "dochub.removeDocs",
+          "when": "false"
         }
       ],
       "view/title": [
@@ -141,6 +151,11 @@
           "command": "dochub.openInBrowser",
           "when": "view == dochub && viewItem == dochub.link",
           "group": "inline@1"
+        },
+        {
+          "command": "dochub.removeDocs",
+          "when": "view == dochub && viewItem == dochub.link",
+          "group": "inline@2"
         }
       ]
     }

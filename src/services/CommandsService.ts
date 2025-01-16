@@ -27,6 +27,9 @@ export class CommandsService {
     subscriptions.push(
       commands.registerCommand(COMMAND.collapseAll, PanelService.collapseAll)
     );
+    subscriptions.push(
+      commands.registerCommand(COMMAND.removeDocs, CommandsService.removeDocs)
+    );
   }
 
   private static async addDocs() {
@@ -92,6 +95,28 @@ export class CommandsService {
     const docsUri = Uri.joinPath(workspaceFolder.uri, General.docsFile);
     if (await fileExists(docsUri)) {
       await window.showTextDocument(docsUri);
+    }
+  }
+
+  private static async removeDocs(item: string | DocHubTreeItem | undefined) {
+    let url = item;
+    if (typeof item === "object") {
+      url = item.url;
+    }
+
+    if (!url) {
+      return;
+    }
+
+    const confirm = await window.showWarningMessage(
+      `Are you sure you want to remove the documentation link for "${url}"?`,
+      { modal: true },
+      "Yes"
+    );
+
+    if (confirm === "Yes") {
+      await DocsService.removeFromDocs(url);
+      PanelService.update();
     }
   }
 }
