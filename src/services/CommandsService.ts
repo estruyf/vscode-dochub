@@ -47,7 +47,8 @@ export class CommandsService {
       value: title,
     });
 
-    DocsService.addToDocs(url, title);
+    await DocsService.addToDocs(url, title);
+    PanelService.update();
   }
 
   private static async openInBrowser(
