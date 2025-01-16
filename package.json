@@ -1,0 +1,172 @@
+{
+  "name": "vscode-dochub",
+  "displayName": "DocHub - Project Docs",
+  "description": "Stay organized and efficient with DocHub, the extension for managing your project documentation. Whether you're working with specific technologies, frameworks, or custom project setups. Store them all within your project.",
+  "version": "0.0.1",
+  "publisher": "eliostruyf",
+  "preview": true,
+  "badges": [
+    {
+      "description": "version",
+      "url": "https://img.shields.io/github/package-json/v/estruyf/vscode-dochub?color=green&label=vscode-dochub&style=flat-square",
+      "href": "https://github.com/estruyf/vscode-dochub"
+    },
+    {
+      "description": "Buy me a coffee",
+      "url": "https://img.shields.io/badge/Buy%20me%20a%20coffee-€%203-blue?logo=buy-me-a-coffee&style=flat-square",
+      "href": "https://www.buymeacoffee.com/zMeFRy9"
+    },
+    {
+      "description": "sponsor",
+      "url": "https://img.shields.io/badge/Sponsor-Elio%20Struyf%20%E2%9D%A4-%23fe8e86?logo=GitHub&style=flat-square",
+      "href": "https://github.com/sponsors/estruyf"
+    }
+  ],
+  "homepage": "https://github.com/estruyf/vscode-dochub",
+  "sponsor": {
+    "url": "https://github.com/sponsors/estruyf"
+  },
+  "license": "MIT",
+  "author": "Elio Struyf <elio@struyfconsulting.be> (https://www.eliostruyf.com)",
+  "bugs": {
+    "url": "https://github.com/estruyf/vscode-dochub/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/estruyf/vscode-dochub"
+  },
+  "engines": {
+    "vscode": "^1.96.0"
+  },
+  "categories": [
+    "Education",
+    "Extension Packs",
+    "Visualization",
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "extensionDependencies": [
+    "antfu.browse-lite"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "dochub.addDocs",
+        "title": "Add Documentation",
+        "category": "DocHub",
+        "icon": "$(add)"
+      },
+      {
+        "command": "dochub.openDocs",
+        "title": "Open Documentation",
+        "category": "DocHub",
+        "icon": "$(browser)"
+      },
+      {
+        "command": "dochub.openInBrowser",
+        "title": "Open in Browser",
+        "category": "DocHub",
+        "icon": "$(link-external)"
+      },
+      {
+        "command": "dochub.openConfig",
+        "title": "Open DocHub File",
+        "category": "DocHub",
+        "icon": "$(eye)"
+      },
+      {
+        "command": "dochub.collapseAll",
+        "title": "Collapse all",
+        "icon": "$(collapse-all)"
+      }
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "dochub",
+          "name": "DocHub",
+          "contextualTitle": "DocHub",
+          "icon": "assets/logo-small.svg"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "dochub",
+        "contents": "Hello and welcome to DocHub! You can use this extension to keep your documentation close to your repository.\n\nGet started by adding a new documentation link to your project.\n\n[Add docs](command:dochub.addDocs)"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "dochub.openDocs",
+          "when": "false"
+        },
+        {
+          "command": "dochub.openInBrowser",
+          "when": "false"
+        },
+        {
+          "command": "dochub.collapseAll",
+          "when": "false"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "dochub.addDocs",
+          "when": "view == dochub",
+          "group": "navigation@0"
+        },
+        {
+          "command": "dochub.openConfig",
+          "when": "view == dochub",
+          "group": "navigation@1"
+        },
+        {
+          "command": "dochub.collapseAll",
+          "when": "view == dochub",
+          "group": "navigation@2"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "dochub.openDocs",
+          "when": "view == dochub && viewItem == dochub.link",
+          "group": "inline@0"
+        },
+        {
+          "command": "dochub.openInBrowser",
+          "when": "view == dochub && viewItem == dochub.link",
+          "group": "inline@1"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.6",
+    "@types/vscode": "^1.96.0",
+    "@typescript-eslint/eslint-plugin": "^8.17.0",
+    "@typescript-eslint/parser": "^8.17.0",
+    "cheerio": "^1.0.0",
+    "esbuild": "^0.24.0",
+    "eslint": "^9.16.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "jsonc-parser": "^3.3.1"
+  }
+}

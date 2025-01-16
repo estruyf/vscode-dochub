@@ -1,0 +1,97 @@
+import { commands, ProgressLocation, Uri, window } from "vscode";
+import { Subscription } from "../models";
+import { Extension } from "./Extension";
+import { COMMAND, General } from "../constants";
+import { fetchTitle, fileExists } from "../utils";
+import { DocHubTreeItem, DocsService, PanelService } from ".";
+
+export class CommandsService {
+  public static register() {
+    const subscriptions: Subscription[] = Extension.getInstance().subscriptions;
+
+    subscriptions.push(
+      commands.registerCommand(COMMAND.addDocs, CommandsService.addDocs)
+    );
+    subscriptions.push(
+      commands.registerCommand(COMMAND.openDocs, CommandsService.openDocs)
+    );
+    subscriptions.push(
+      commands.registerCommand(
+        COMMAND.openInBrowser,
+        CommandsService.openInBrowser
+      )
+    );
+    subscriptions.push(
+      commands.registerCommand(COMMAND.openConfig, CommandsService.openConfig)
+    );
+    subscriptions.push(
+      commands.registerCommand(COMMAND.collapseAll, PanelService.collapseAll)
+    );
+  }
+
+  private static async addDocs() {
+    const url = await window.showInputBox({
+      prompt: "Enter the URL of the documentation",
+    });
+
+    if (!url) {
+      return;
+    }
+
+    let title: string | undefined = await fetchTitle(url);
+    title = await window.showInputBox({
+      prompt: "Enter the title of the documentation",
+      value: title,
+    });
+
+    DocsService.addToDocs(url, title);
+  }
+
+  private static async openInBrowser(
+    item: string | DocHubTreeItem | undefined
+  ) {
+    let url = item;
+    if (typeof item === "object") {
+      url = item.url;
+    }
+
+    if (!url) {
+      return;
+    }
+
+    await commands.executeCommand("vscode.open", url);
+  }
+
+  private static async openDocs(item: string | DocHubTreeItem | undefined) {
+    let url = item;
+    if (typeof item === "object") {
+      url = item.url;
+    }
+
+    if (!url) {
+      return;
+    }
+
+    window.withProgress(
+      {
+        location: ProgressLocation.Notification,
+        title: "Opening documentation...",
+      },
+      async () => {
+        await commands.executeCommand("browse-lite.open", url);
+      }
+    );
+  }
+
+  private static async openConfig() {
+    const workspaceFolder = Extension.getInstance().workspaceFolder;
+    if (!workspaceFolder) {
+      return;
+    }
+
+    const docsUri = Uri.joinPath(workspaceFolder.uri, General.docsFile);
+    if (await fileExists(docsUri)) {
+      await window.showTextDocument(docsUri);
+    }
+  }
+}
