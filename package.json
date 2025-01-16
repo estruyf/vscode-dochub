@@ -144,12 +144,12 @@
       "view/item/context": [
         {
           "command": "dochub.openDocs",
-          "when": "view == dochub && viewItem == dochub.link",
+          "when": "view == dochub && viewItem =~ /dochub.link/",
           "group": "inline@0"
         },
         {
           "command": "dochub.openInBrowser",
-          "when": "view == dochub && viewItem == dochub.link",
+          "when": "view == dochub && viewItem =~ /dochub.link/",
           "group": "inline@1"
         },
         {

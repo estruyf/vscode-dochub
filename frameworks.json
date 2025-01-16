@@ -17,6 +17,12 @@
       "files": ["package.json"],
       "contents": ["@angular/core"],
       "links": ["https://angular.io/start"]
+    },
+    {
+      "name": "Slidev",
+      "files": ["package.json"],
+      "contents": ["@slidev/cli"],
+      "links": ["https://sli.dev/"]
     }
   ]
 }

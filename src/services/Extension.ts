@@ -2,6 +2,7 @@ import {
   ExtensionContext,
   ExtensionMode,
   SecretStorage,
+  Uri,
   workspace,
 } from "vscode";
 import { Config } from "../constants";
@@ -77,6 +78,13 @@ export class Extension {
    */
   public get extensionPath(): string {
     return this.ctx.extensionPath;
+  }
+
+  /**
+   * Get the extension's URI
+   */
+  public get extensionUri(): Uri {
+    return this.ctx.extensionUri;
   }
 
   /**

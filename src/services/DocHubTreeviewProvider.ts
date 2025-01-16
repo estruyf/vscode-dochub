@@ -44,7 +44,8 @@ export class DocHubTreeItem extends TreeItem {
     command?: string,
     public url?: string,
     icon?: Uri | string,
-    private children?: DocHubTreeItem[]
+    private children?: DocHubTreeItem[],
+    contextValue?: string
   ) {
     super(
       label,
@@ -74,6 +75,10 @@ export class DocHubTreeItem extends TreeItem {
       : undefined;
 
     this.contextValue = url ? "dochub.link" : "dochub.folder";
+
+    if (contextValue) {
+      this.contextValue += ` ${contextValue}`;
+    }
 
     this.children = children;
   }
