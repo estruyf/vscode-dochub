@@ -1,4 +1,4 @@
-import { commands, ProgressLocation, Uri, window } from "vscode";
+import { commands, ProgressLocation, window } from "vscode";
 import { Subscription } from "../models";
 import { Extension } from "./Extension";
 import { COMMAND, General } from "../constants";
@@ -94,7 +94,7 @@ export class CommandsService {
     }
 
     const docsUri = await findFileInWorkspace(General.docsFile);
-    if (docsUri && await fileExists(docsUri)) {
+    if (docsUri && (await fileExists(docsUri))) {
       await window.showTextDocument(docsUri);
     }
   }

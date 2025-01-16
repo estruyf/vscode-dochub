@@ -6,7 +6,7 @@ import {
   FrameworkDiscovery,
 } from ".";
 import { COMMAND } from "../constants";
-import { getFaviconPath, findFileInWorkspace } from "../utils";
+import { getFaviconPath } from "../utils";
 
 export class PanelService {
   private static treeView: TreeView<TreeItem>;

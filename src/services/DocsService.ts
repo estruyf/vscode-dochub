@@ -1,4 +1,4 @@
-import { Uri, workspace } from "vscode";
+import { workspace } from "vscode";
 import { General } from "../constants";
 import { fileExists, findFileInWorkspace } from "../utils";
 import { Extension } from "./Extension";
@@ -34,7 +34,7 @@ export class DocsService {
     }
 
     const docsUri = await findFileInWorkspace(General.docsFile);
-    if (docsUri && await fileExists(docsUri)) {
+    if (docsUri && (await fileExists(docsUri))) {
       const fileContent = await workspace.fs.readFile(docsUri);
       const fileTxt = Buffer.from(fileContent).toString("utf-8");
       const json = parse(fileTxt);
