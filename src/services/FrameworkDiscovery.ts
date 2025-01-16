@@ -1,5 +1,6 @@
-import { Framework } from "./../models/FrameworkInfo";
 import { Uri, workspace } from "vscode";
+import { readFileContent } from "../utils";
+import { Framework } from "../models";
 import { Extension } from "./Extension";
 
 export class FrameworkDiscovery {
@@ -84,12 +85,9 @@ export class FrameworkDiscovery {
 
     for (const folder of workspaceFolders) {
       const packageJsonUri = Uri.joinPath(folder.uri, "package.json");
-      const packageJson = await workspace.fs.readFile(packageJsonUri);
+      const packageJson = await readFileContent(packageJsonUri);
       if (packageJson) {
-        const packageTxt = Buffer.from(packageJson).toString("utf-8");
-        FrameworkDiscovery.frameworkFiles["package.json"] =
-          JSON.parse(packageTxt);
-        return FrameworkDiscovery.frameworkFiles["package.json"];
+        return JSON.parse(packageJson);
       }
     }
 
