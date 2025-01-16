@@ -99,8 +99,10 @@ export class CommandsService {
   }
 
   private static async removeDocs(item: string | DocHubTreeItem | undefined) {
+    let title = item;
     let url = item;
     if (typeof item === "object") {
+      title = item.label;
       url = item.url;
     }
 
@@ -109,13 +111,13 @@ export class CommandsService {
     }
 
     const confirm = await window.showWarningMessage(
-      `Are you sure you want to remove the documentation link for "${url}"?`,
+      `Are you sure you want to remove the documentation link for "${title}"?`,
       { modal: true },
       "Yes"
     );
 
     if (confirm === "Yes") {
-      await DocsService.removeFromDocs(url);
+      await DocsService.removeFromDocs(url as string);
       PanelService.update();
     }
   }
