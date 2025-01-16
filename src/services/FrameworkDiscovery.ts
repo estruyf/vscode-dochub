@@ -1,20 +1,13 @@
 import { Uri, workspace } from "vscode";
 
 export class FrameworkDiscovery {
-  private static frameworks: Array<
-    keyof typeof FrameworkDiscovery.frameworkDocs
-  > = ["react", "vue", "angular", "@slidev/cli"];
-  private static frameworkDocs: { [key: string]: string } = {
-    react: "https://react.dev/",
-    vue: "https://vuejs.org/guide/introduction.html",
-    angular: "https://angular.io/start",
-    "@slidev/cli": "https://sli.dev/guide/",
-  };
+  private static frameworks: Array<string> = [];
+  private static frameworkDocs: { [key: string]: string } = {};
 
   public static async discover() {
     const frameworks = await FrameworkDiscovery.getFrameworks();
     if (frameworks) {
-      // Retrun all the frameworks with their documentation links
+      // Return all the frameworks with their documentation links
       return frameworks.map((framework) => {
         return {
           name: framework,
@@ -74,4 +67,33 @@ export class FrameworkDiscovery {
     );
     return frameworks;
   }
+
+  public static async loadFrameworks() {
+    const workspaceFolders = workspace.workspaceFolders;
+    if (!workspaceFolders) {
+      return;
+    }
+
+    for (const folder of workspaceFolders) {
+      const frameworksJsonUri = Uri.joinPath(folder.uri, "frameworks.json");
+      const frameworksJson = await workspace.fs.readFile(frameworksJsonUri);
+      if (frameworksJson) {
+        const frameworksTxt = Buffer.from(frameworksJson).toString("utf-8");
+        const frameworksData = JSON.parse(frameworksTxt);
+        FrameworkDiscovery.frameworks = frameworksData.frameworks.map(
+          (framework: any) => framework.contents[0]
+        );
+        FrameworkDiscovery.frameworkDocs = frameworksData.frameworks.reduce(
+          (acc: any, framework: any) => {
+            acc[framework.contents[0]] = framework.links[0];
+            return acc;
+          },
+          {}
+        );
+      }
+    }
+  }
 }
+
+// Load frameworks from frameworks.json
+FrameworkDiscovery.loadFrameworks();
