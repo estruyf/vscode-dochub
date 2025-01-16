@@ -9,7 +9,44 @@ Stay organized and efficient with DocHub, the extension for managing your projec
 
 ## Usage
 
-TBA
+### Adding Documentation Links
+
+To add a documentation link to your project, use the `DocHub` view in the `Explorer` panel of Visual Studio Code:
+
+1. Open the `Explorer` panel in Visual Studio Code.
+2. Find the `DocHub` view.
+3. On the title bar of the `DocHub` view, click the add action.
+4. Enter the URL of the documentation you want to add.
+5. Optionally, enter a title for the documentation link.
+5. Optionally, enter a category for the documentation link.
+
+### Opening Documentation in Visual Studio Code
+
+To open a documentation link within Visual Studio Code:
+
+1. Open the `Explorer` panel in Visual Studio Code.
+2. Find the `DocHub` view.
+3. Click on the documentation link you want to open.
+
+> To open the link in Visual Studio Code, the extension uses the [Browse Lite](https://marketplace.visualstudio.com/items?itemName=antfu.browse-lite) extension.
+
+### Opening Documentation in Browser
+
+To open a documentation link in the browser:
+
+1. Open the `Explorer` panel in Visual Studio Code.
+2. Find the `DocHub` view.
+3. Hover over the documentation link you want to open.
+4. Click on the external link icon to open the link in the browser.
+
+### Managing Documentation
+
+To delete a documentation link:
+
+1. Open the `Explorer` panel in Visual Studio Code.
+2. Find the `DocHub` view.
+3. Hover over the documentation link you want to delete.
+4. Click on the delete icon to delete the link from the project.
 
 ## Support
 
