@@ -1,0 +1,28 @@
+{
+  "frameworks": [
+    {
+      "name": "React",
+      "files": ["package.json"],
+      "contents": ["react"],
+      "links": ["https://react.dev/"]
+    },
+    {
+      "name": "Vue",
+      "files": ["package.json"],
+      "contents": ["vue"],
+      "links": ["https://vuejs.org/guide/introduction.html"]
+    },
+    {
+      "name": "Angular",
+      "files": ["package.json"],
+      "contents": ["@angular/core"],
+      "links": ["https://angular.io/start"]
+    },
+    {
+      "name": "Slidev",
+      "files": ["package.json"],
+      "contents": ["@slidev/cli"],
+      "links": ["https://sli.dev/"]
+    }
+  ]
+}

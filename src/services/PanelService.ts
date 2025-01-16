@@ -74,14 +74,16 @@ export class PanelService {
           "Frameworks",
           undefined,
           undefined,
-          undefined,
+          "tools",
           frameworkLinks.map(
             (framework) =>
               new DocHubTreeItem(
                 framework.name,
                 COMMAND.openDocs,
                 framework.link,
-                undefined
+                undefined,
+                undefined,
+                "dochub.framework"
               )
           )
         )
