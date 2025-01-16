@@ -10,4 +10,6 @@ export const COMMAND = {
   collapseAll: `${EXTENSION_NAME}.collapseAll`,
   // Output
   showOutputChannel: `${EXTENSION_NAME}.showOutputChannel`,
+  // Remove
+  removeDocs: `${EXTENSION_NAME}.removeDocs`,
 };
