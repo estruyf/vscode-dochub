@@ -8,3 +8,8 @@ export const fileExists = async (filePath: Uri): Promise<boolean> => {
     return false;
   }
 };
+
+export const findDocsFileInWorkspace = async (): Promise<Uri | undefined> => {
+  const files = await workspace.findFiles('**/.dochub.json', '**/node_modules/**');
+  return files.length > 0 ? files[0] : undefined;
+};

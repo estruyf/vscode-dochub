@@ -1,8 +1,8 @@
-import { commands, ProgressLocation, Uri, window } from "vscode";
+import { commands, ProgressLocation, window } from "vscode";
 import { Subscription } from "../models";
 import { Extension } from "./Extension";
 import { COMMAND, General } from "../constants";
-import { fetchTitle, fileExists } from "../utils";
+import { fetchTitle, fileExists, findFileInWorkspace } from "../utils";
 import { DocHubTreeItem, DocsService, PanelService } from ".";
 
 export class CommandsService {
@@ -93,8 +93,8 @@ export class CommandsService {
       return;
     }
 
-    const docsUri = Uri.joinPath(workspaceFolder.uri, General.docsFile);
-    if (await fileExists(docsUri)) {
+    const docsUri = await findFileInWorkspace(General.docsFile);
+    if (docsUri && (await fileExists(docsUri))) {
       await window.showTextDocument(docsUri);
     }
   }
