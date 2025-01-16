@@ -47,7 +47,22 @@ export class CommandsService {
       value: title,
     });
 
-    await DocsService.addToDocs(url, title);
+    const existingCategories = await DocsService.getCategories();
+    const category = await window.showQuickPick(
+      [...existingCategories, "Add new category..."],
+      {
+        placeHolder: "Select a category or add a new one",
+      }
+    );
+
+    let newCategory: string | undefined;
+    if (category === "Add new category...") {
+      newCategory = await window.showInputBox({
+        prompt: "Enter the new category",
+      });
+    }
+
+    await DocsService.addToDocs(url, title, newCategory || category);
     PanelService.update();
   }
 
