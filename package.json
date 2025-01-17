@@ -4,6 +4,7 @@
   "description": "Stay organized and efficient with DocHub, the extension for managing your project documentation. Whether you're working with specific technologies, frameworks, or custom project setups. Store them all within your project.",
   "version": "0.0.2",
   "publisher": "eliostruyf",
+  "icon": "assets/dochub.png",
   "preview": true,
   "badges": [
     {

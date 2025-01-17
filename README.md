@@ -2,6 +2,8 @@
 
 Stay organized and efficient with DocHub, the extension for managing your project documentation. Whether you're working with specific technologies, frameworks, or custom project setups. Store them all within your project.
 
+![DocHub - Project Docs](./assets/dochub-sample.png)
+
 ## Features
 
 - Add your own documentation links to the project
@@ -18,7 +20,7 @@ To add a documentation link to your project, use the `DocHub` view in the `Explo
 3. On the title bar of the `DocHub` view, click the add action.
 4. Enter the URL of the documentation you want to add.
 5. Optionally, enter a title for the documentation link.
-5. Optionally, enter a category for the documentation link.
+6. Optionally, enter a category for the documentation link.
 
 ### Opening Documentation in Visual Studio Code
 
