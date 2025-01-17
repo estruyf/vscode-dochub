@@ -12,7 +12,7 @@ export const fetchTitle = async (url: string): Promise<string> => {
 
   await fetchFavicon($, url);
 
-  return title || "";
+  return (title || "").trim();
 };
 
 const fetchFavicon = async ($: cheerio.CheerioAPI, url: string) => {
