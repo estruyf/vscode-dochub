@@ -110,17 +110,17 @@ export class Extension {
    * @returns The value associated with the specified key, or undefined if the key does not exist.
    */
   public getState<T>(key: string): T | undefined {
-    return this.ctx.workspaceState.get(key);
+    return this.ctx.globalState.get(key);
   }
 
   /**
-   * Sets the state of a key-value pair in the workspace state.
+   * Sets the state of a key-value pair in the global state.
    * @param key - The key of the state.
    * @param value - The value to set for the state.
    * @returns A promise that resolves when the state is updated.
    */
   public async setState(key: string, value: any) {
-    return await this.ctx.workspaceState.update(key, value);
+    return await this.ctx.globalState.update(key, value);
   }
 
   /**

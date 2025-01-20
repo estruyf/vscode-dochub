@@ -1,3 +1,4 @@
+export * from "./BackgroundService";
 export * from "./CommandsService";
 export * from "./ConfigListeners";
 export * from "./DocHubTreeviewProvider";

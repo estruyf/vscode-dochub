@@ -88,6 +88,11 @@
         "title": "Remove Documentation",
         "category": "DocHub",
         "icon": "$(trash)"
+      },
+      {
+        "command": "dochub.refreshFavicons",
+        "title": "Update the favicons",
+        "category": "DocHub"
       }
     ],
     "views": {

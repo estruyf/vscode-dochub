@@ -1,9 +1,14 @@
-import { commands, ProgressLocation, window } from "vscode";
+import { commands, ProgressLocation, Uri, window, workspace } from "vscode";
 import { Subscription } from "../models";
 import { Extension } from "./Extension";
 import { COMMAND, General } from "../constants";
 import { fetchTitle, fileExists, findFileInWorkspace } from "../utils";
-import { DocHubTreeItem, DocsService, PanelService } from ".";
+import {
+  BackgroundService,
+  DocHubTreeItem,
+  DocsService,
+  PanelService,
+} from ".";
 
 export class CommandsService {
   public static register() {
@@ -29,6 +34,12 @@ export class CommandsService {
     );
     subscriptions.push(
       commands.registerCommand(COMMAND.removeDocs, CommandsService.removeDocs)
+    );
+    subscriptions.push(
+      commands.registerCommand(
+        COMMAND.refreshFavicons,
+        CommandsService.refreshFavicons
+      )
     );
   }
 
@@ -136,5 +147,24 @@ export class CommandsService {
       await DocsService.removeFromDocs(url as string);
       PanelService.update();
     }
+  }
+
+  private static async refreshFavicons() {
+    const ext = Extension.getInstance();
+    await ext.createGlobalStorageIfNotExists();
+
+    const storageStatePath = ext.globalStorageUri;
+    if (!storageStatePath) {
+      return;
+    }
+
+    const files = await workspace.fs.readDirectory(storageStatePath);
+    for (const [fileName] of files) {
+      const filePath = Uri.joinPath(storageStatePath, fileName);
+      await workspace.fs.delete(filePath);
+    }
+
+    PanelService.update();
+    await BackgroundService.onStartup(true);
   }
 }

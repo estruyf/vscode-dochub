@@ -1,6 +1,11 @@
 import * as vscode from "vscode";
 import { Extension } from "./services/Extension";
-import { CommandsService, ConfigListeners, PanelService } from "./services";
+import {
+  BackgroundService,
+  CommandsService,
+  ConfigListeners,
+  PanelService,
+} from "./services";
 
 export function activate(context: vscode.ExtensionContext) {
   Extension.getInstance(context);
@@ -8,6 +13,7 @@ export function activate(context: vscode.ExtensionContext) {
   ConfigListeners.register();
   CommandsService.register();
   PanelService.register();
+  BackgroundService.onStartup();
 
   console.log("📓 DocHub is now active!");
 }

@@ -1,5 +1,5 @@
 import { Uri, workspace } from "vscode";
-import { readFileContent } from "../utils";
+import { getFaviconPath, readFileContent } from "../utils";
 import { Framework } from "../models";
 import { Extension } from "./Extension";
 
@@ -14,20 +14,26 @@ export class FrameworkDiscovery {
     let frameworkLinks: {
       name: string;
       link: string;
+      icon?: Uri;
     }[] = [];
 
     const frameworks = await FrameworkDiscovery.getFrameworks();
     if (frameworks) {
       // Return all the frameworks with their documentation links
-      frameworkLinks = frameworks.map((framework) => {
-        return {
-          name: framework,
-          link:
-            FrameworkDiscovery.frameworkDocs[
-              framework as keyof typeof FrameworkDiscovery.frameworkDocs
-            ] || "",
-        };
-      });
+      frameworkLinks = [];
+
+      for (const doc of frameworks) {
+        const link =
+          FrameworkDiscovery.frameworkDocs[
+            doc as keyof typeof FrameworkDiscovery.frameworkDocs
+          ] || "";
+
+        frameworkLinks.push({
+          name: doc,
+          link: link,
+          icon: await getFaviconPath(link),
+        });
+      }
     }
 
     FrameworkDiscovery.frameworkFiles = {};

@@ -1,3 +1,4 @@
+export * from "./fetchFavicon";
 export * from "./fetchTitle";
 export * from "./fileExists";
 export * from "./findFileInWorkspace";

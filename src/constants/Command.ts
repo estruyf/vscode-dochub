@@ -6,6 +6,7 @@ export const COMMAND = {
   openInBrowser: `${EXTENSION_NAME}.openInBrowser`,
   // Config
   openConfig: `${EXTENSION_NAME}.openConfig`,
+  refreshFavicons: `${EXTENSION_NAME}.refreshFavicons`,
   // Panel
   collapseAll: `${EXTENSION_NAME}.collapseAll`,
   // Output

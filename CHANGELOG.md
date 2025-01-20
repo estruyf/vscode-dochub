@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.0.4 - 2025-01-17
+
+- Implemented timeout logic for title and favicon fetching
+- [#4](https://github.com/estruyf/vscode-dochub/issues/4): Update favicons as a background process
+- [#5](https://github.com/estruyf/vscode-dochub/issues/5): Update favicons command added
+
 ## 0.0.3 - 2025-01-17
 
 - Added a logo

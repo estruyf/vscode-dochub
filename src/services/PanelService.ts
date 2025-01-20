@@ -81,7 +81,7 @@ export class PanelService {
                 framework.name,
                 COMMAND.openDocs,
                 framework.link,
-                undefined,
+                framework.icon,
                 undefined,
                 "dochub.framework"
               )
